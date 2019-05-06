@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>库房管理系统</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../media/css/bootstrap-4.0.0.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+  <link href="../media/css/mycss_2.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../media/images/favicon.ico" />
+  <script src="../media/js/jquery-3.2.1.min.js"></script>
+  <script src="../media/js/popper.min.js"></script>
+  <script src="../media/js/bootstrap-4.0.0.js"></script>
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">主页</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="#">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Services</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+<div >
+<table class="table table-hover" id="user_Table" style="display: none">
+    <thead>
+      <tr>
+        <th>用户邮箱</th>
+          <th>用户等级</th>
+          <th>执行时间</th>
+          <th>执行类型</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+		</div>
+<!-- 中间提示按钮 -->
+  <button type="button" class="btn btn-success setcenter btn-lg" id="dh_result"  >成功</button>
+<!-- 遮罩层 -->
+    <div id="mask" class="mask "></div>
+<!-- 弹框表 -->
+  <div id="gengxin" class="xinxibiao container" >
+      <!-- 弹框表格 用于采集信息 -->
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-12">
+                    <div class="youduiqi">
+                      <label><h5>分公司:</h5></label>
+                        <input class="myinp " type="text"  id="shuruk" placeholder="分公司">
+                    </div>
+                    </div>
+                <div class="col-12 ">
+                    <div class="youduiqi">
+                 <label><h5>名字:</h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="名字">
+                </div>
+                    </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5>型号:</h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="型号">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5> </h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuliang" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div><div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 ">
+                <div class="juzhong">
+                     <button type="button" class="btn" id="save">保存</button>
+                    <button type="button" class="btn" id="close">取消</button>
+                </div>
+                </div>
+                 </div>
+  </div>
+  <!-- container -->
+  <div class="container" id="chengdh0">
+    <div class="row text-center">
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image_rk1.png" alt="">
+          <div class="card-body">
+            <h4 class="card-title">系统日志</h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+          </div>
+          <div class="card-footer">
+            <a id="sys_btn" class="btn btn-primary">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image3.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">用户信息修改</h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sapiente esse necessitatibus neque.</p>
+          </div>
+          <div class="card-footer">
+            <a href="admin" class="btn btn-primary">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image4.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">新增数据</h4>
+            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo magni sapiente, tempore debitis beatae culpa natus architecto.</p>
+          </div>
+          <div class="card-footer">
+            <a  class="btn btn-primary" id="zeng">Find Out More!</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+
+
+</body>
+
+	<script src="../media/js/indexC.js" ></script>
+ <script src="../media/js/jquery.cookie.js"></script>
+</html>

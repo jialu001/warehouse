@@ -1,0 +1,104 @@
+/*!
+ * Start Bootstrap - Heroic Features (https://startbootstrap.com/template-overviews/heroic-features)
+ * Copyright 2013-2019 Start Bootstrap
+ * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-heroic-features/blob/master/LICENSE)
+ */
+body {
+  padding-top: 56px;
+}
+.card-img-top{
+	
+}
+.setcenter{
+	position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+
+}
+
+#main_1{
+	height: 100vh;
+	width: 100vw;
+
+    /*  background-color: #97c3ff;*/
+
+
+}
+
+#main_2{
+
+
+}
+
+#main_3{
+    display: none;
+}
+
+#chengdh0{
+    padding-top: 80px;
+}
+
+.mask {
+            position: absolute; top: 0px; filter: alpha(opacity=60); background-color: #777;
+            z-index: 1002; left: 0px;
+            opacity:0.5; -moz-opacity:0.5;
+        }
+
+
+.xinxibiao{
+        position: absolute;
+        margin-top: 0px;
+        margin-left: 30%;
+        width: 40%;
+        height: 600px;
+        background-color: rgb(255, 251, 240);
+}
+
+#gengxin{
+    z-index: 1003;
+    display: none;
+}
+
+
+.youduiqi{
+
+    float: right;
+    padding-right: 20%;
+}
+
+.myinp{
+    border-radius: 6px;
+}
+
+.juzhong{
+    width: 40%;
+    margin-left: 30%;
+}
+#close{
+    float: right;
+    margin-right: 0px;
+}
+#dh_result{
+    z-index: 1002;
+    display: none;
+}
+.bordown{
+    border-top: transparent;
+    border-right: transparent;
+    border-bottom: medium solid #aaaaaa;
+    border-left: transparent;
+    padding-top: 3%;
+}
+.backgSet{
+    background-color: #c6c8ca;
+    padding-top: 3%;
+}
+@media screen and (max-width: 1200px) {
+    .youduiqi{
+
+    float: left;
+}
+
+}

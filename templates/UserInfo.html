@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>用户信息</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../media/css/bootstrap-4.0.0.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="../media/css/mycss_2.css" rel="stylesheet">
+  <link href="../media/css/userInfo.css" rel="stylesheet">
+  <script src="../media/js/jquery-3.2.1.min.js"></script>
+  <script src="../media/js/popper.min.js"></script>
+  <script src="../media/js/bootstrap-4.0.0.js"></script>
+  <script src="../media/js/indexContro3.js"></script>
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">主页</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">主页
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item  active">
+             <a class="nav-link" href="showinfo">个人信息</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contactUs">联系我们</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="log">登出</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="background-color: rgba(11,9,13,0.04);margin-top: -2%;">
+<div class="container"  style="width:90%;height: 600px;margin-top: 2%;">
+    <div class="row" style="height: inherit;" >
+        <!-- 左侧 -->
+     <div  style="height: 80%;margin-top:5%;width: 30%;background-color: white">
+         <!-- 头像-->
+         <div class="row" style="height: 30%"  > </div>
+         <!-- ID-->
+         <div class="row " style="height: 10%;margin-left: 30%;" >
+          <h3 style="">用户ID:</h3> <h3 id="user_id" ></h3>
+         </div>
+         <!-- 功能-->
+         <div class="row" style="height: 60%;" > </div>
+     </div>
+
+        <!-- 右侧-->
+    <div  style="margin-left: 5%;width:60%;height: 80%;margin-top: 5%;background-color: white;">
+        <!-- 提示 -->
+        <div style="width: 90%;margin-left: 5%;height: inherit;">
+         <div class="row" style="height: 15%;  border-top: transparent;
+    border-right: transparent;
+    border-bottom: medium solid #aaaaaa;
+    border-left: transparent;"  >
+         <h4 style="height:100%;padding-top: 2%"> 个人信息 </h4>
+         </div>
+         <!-- 用户信息展示区 -->
+         <div class="row userinfo" style="height: 15%;margin-left: 10%;margin-top: 2% " >
+              <div class="backgSet text-center"  style="width: 20% ;" >
+                姓名
+              </div>
+             <div class="bordown" id="user_name" style="margin-left: 5%;width: 75%;" >
+             </div>
+         </div>
+          <div class="row userinfo" >
+              <div class="backgSet text-center"  style="width: 20% ;" >
+                权限等级
+              </div>
+             <div class="bordown" id="user_level" style="margin-left: 5%;width: 75%;" >
+             </div>
+         </div>
+          <div class="row userinfo"  >
+              <div class="backgSet text-center"  style="width: 20% ;" >
+                密码
+              </div>
+             <div class="bordown" id="user_psd" style="margin-left: 5%;width: 75%;" >
+             </div>
+         </div>
+          <div class="row userinfo" >
+              <div class="backgSet text-center"  style="width: 20% ;" >
+                电话
+              </div>
+             <div class="bordown" id="user_phone" style="margin-left: 5%;width: 75%;" >
+             </div>
+         </div>
+          <div class="row userinfo"  >
+              <div class="backgSet text-center"  style="width: 20% ;" >
+                邮箱
+              </div>
+             <div class="bordown" id="user_email" style="margin-left: 5%;width: 75%;" >
+             </div>
+         </div>
+
+    </div>
+        </div>
+    </div>
+</div>
+</div>
+  <!-- Footer -->
+  <footer class="py-5 bg-dark " style="position: relative">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+
+
+
+<script src="../media/js/jquery.cookie.js"></script>
+<script src="../media/js/userInfo.js"></script>
+</body>
+
+	
+
+</html>

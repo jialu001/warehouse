@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>库房管理系统</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="../media/css/bootstrap-4.0.0.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+  <link href="../media/css/mycss_2.css" rel="stylesheet">
+  <link href="../media/css/indexCSS1.css" rel="stylesheet">
+  <link rel="shortcut icon" href="../media/images/favicon.ico" />
+  <script src="../media/js/jquery-3.2.1.min.js"></script>
+  <script src="../media/js/popper.min.js"></script>
+  <script src="../media/js/bootstrap-4.0.0.js"></script>
+  <script src="../media/js/indexContro3.js"></script>
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">主页</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">主页
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="showinfo">个人信息</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="contactUs">联系我们</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="log">登出</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+ <!-- 出库弹框表2 -->
+  <div id="out2_info" class="container" style="">
+      <div class="row" ><h4>请确认出库信息</h4> </div>
+        <div class="row" >
+            <div style="width: 35% ;padding-left: 10%;">
+                <h4>设备名</h4>
+                <h4>型号</h4>
+                <h4>序列号</h4>
+                <h4>货位号</h4>
+                <h4>状态</h4>
+                <h4>ID</h4>
+                <h4>备注</h4>
+            </div>
+             <div style="width: 60%">
+                 <h4 id="out2_item_info"> </h4>
+             </div>
+        </div>
+
+      <button type="button" class="btn" id="out_yes">确认</button>
+      <button type="button" class="btn" id="out_no">取消</button>
+  </div>
+
+  <!-- 隐藏的搜索结果表-->
+    <div id="main_3" >
+        <!-- 搜索结果的显示页面-->
+        <div style="width: 100%;padding-top:10px;padding-left:5%;height: 60px;border-color: #71dd8a;border-width: thin;border-style: dashed;">
+            <!-- 显示页面的搜索框-->
+          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="input1"/> <button type="button" class="btn" id="query1">快捷查询</button>
+        </div>
+
+        <table class="table table-hover" id="myTable" style="width:90%;margin-left: 5%;">
+             <!-- 显示页面的table -->
+    <thead>
+      <tr>
+
+        <th>设备名</th>
+          <th>型号</th>
+          <th>序列号</th>
+          <th>货位号</th>
+          <th>状态</th>
+          <th>ID</th>
+          <th>备注</th>
+
+
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+</table>
+		</div>
+
+  <!-- 中间提示按钮 -->
+  <button type="button" class="btn btn-success setcenter btn-lg" id="dh_result"  >成功</button>
+<!-- 遮罩层 -->
+    <div id="mask" class="mask "></div>
+<!-- 出库弹框表1 -->
+  <div id="out_info" class="xinxibiao container" style="height: 180px;display: none;margin-top: 200px;z-index: 1003">
+      <h4>请输入你想出库设备的配件名称或规格型号或序列号</h4>
+          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="input2"/> <button type="button" class="btn" id="query2">快捷查询</button>
+          <button type="button" class="btn" id="cancel2">取消</button>
+  </div>
+
+  <!-- 入库弹框表 -->
+  <div id="gengxin" class="xinxibiao container" >
+      <!-- 弹框表格 用于采集信息 -->
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-12">
+                    <div class="youduiqi">
+                      <label><h5>分公司:</h5></label>
+                        <input class="myinp " type="text"  id="shuruk" placeholder="分公司">
+                    </div>
+                    </div>
+                <div class="col-12 ">
+                    <div class="youduiqi">
+                 <label><h5>名字:</h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="名字">
+                </div>
+                    </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5>型号:</h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="型号">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5> </h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuliang" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div><div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 "><div class="youduiqi">
+                 <label><h5></h5></label>
+                <input type="text" class="myinp " id="shuruk" placeholder="">
+                </div>
+                </div>
+                <div class="col-12 ">
+                <div class="juzhong">
+                     <button type="button" class="btn" id="save">保存</button>
+                    <button type="button" class="btn" id="close">取消</button>
+                </div>
+                </div>
+                 </div>
+  </div>
+
+<!-- 中部核心区域 -->
+  <div class="container" id="index_c1">
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <h1 class="display-3">
+          库房管理系统
+      </h1>
+      <p class="lead">
+          系统介绍：快捷查询 仅支持配件名称，规格型号和序列号
+      </p>
+          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="search_input0"/> <button type="button" class="btn" id="formquery">快捷查询</button>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image_rk1.png" alt="">
+          <div class="card-body">
+            <h4 class="card-title">设备查询</h4>
+            <p class="card-text">权限要求：1</p>
+          </div>
+          <div class="card-footer">
+            <a href="search.html" class="btn btn-primary">点击进入详情搜索页面</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image2.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">产品入库</h4>
+            <p class="card-text">
+                设备入库时填写 </br> 权限要求：2 </p>
+          </div>
+          <div class="card-footer">
+            <a id="zeng" class="btn btn-primary">点击填写表格</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image3.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">产品出库</h4>
+              <p class="card-text"> 产品出库时填写 </br>
+                权限要求：3</p>
+          </div>
+          <div class="card-footer">
+            <a id="out" class="btn btn-primary">进入</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 mb-4">
+        <div class="card h-100">
+          <img class="card-img-top" src="../media/images/image4.jpg" alt="">
+          <div class="card-body">
+            <h4 class="card-title">后台管理（仅管理人员使用）</h4>
+            <p class="card-text">权限要求：2-3 </p>
+          </div>
+          <div class="card-footer">
+            <a href="dh" class="btn btn-primary">进入</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- /.row -->
+
+  </div>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+ <script src="../media/js/jquery.cookie.js"></script>
+  <script src="../media/js/indexC.js" ></script>
+</body>
+
+	
+
+</html>

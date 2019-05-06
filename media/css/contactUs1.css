@@ -1,0 +1,12 @@
+.myActive{
+    color: #c80000;
+
+}
+
+.infodown{
+     border-top: transparent;
+    border-right: transparent;
+    border-bottom: medium solid #aaaaaa;
+    border-left: transparent;
+    padding-top: 6%;
+}
