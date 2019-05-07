@@ -30,11 +30,11 @@ $(document).ready(function(){
 
       $('#search_input0').keydown(function(e){
         if(e.keyCode==13){
-            postFastQuery("search_input0");
+            postFastQuery("search_input0","search-post","myTable","#main_3");
         }
         });
 
-        // Nor 搜索页面的搜索按钮
+        // 详细搜索页面的搜索按钮
       $("#search_btn0").click(function(){
          var shuruku = document.getElementsByClassName("myinp");
          var checkres = document.getElementsByClassName("checkbox");
@@ -81,14 +81,14 @@ $(document).ready(function(){
                  });
       });
 
-      //显示页面的搜索按钮
+      //结果页面的搜索按钮
       $("#query1").click(function () {
-          postFastQuery("input1");
+          postFastQuery("input1","search-post","myTable","#main_3");
       })
 
       //入库的搜索按钮
       $("#query2").click(function () {
-          postFastQuery("input2");
+          postFastQuery("input2","search-post","myTable","#main_3");
           hideMask();
           $("#out_info").css("display","none");
       })
@@ -101,7 +101,7 @@ $(document).ready(function(){
 
         //index页面快捷查询控制
       $("#formquery").click(function(){
-            postFastQuery("search_input0");
+            postFastQuery("search_input0","search-post","myTable","#main_3");
       });
 
       $("#close_search").click(function () {
@@ -122,7 +122,6 @@ $(document).ready(function(){
       $("#myTable").on("click","button",function () {
            var itemID = $(this).attr("value")-1;
            retID = itemID;
-           var margintop = $(document).scrollTop()+100;
            item =(ajaxret[itemID]) ;
            var  str="" ;
             for (var key in item) {
@@ -131,6 +130,7 @@ $(document).ready(function(){
            $("#out2_item_info").html(str);
            showMask();
            $("#out2_info").css("display","block");
+           var margintop = $(document).scrollTop()+100;
            $("#out2_info").css("margin-top",(margintop));
            console.log("距离顶部位置"+$(document).scrollTop());
       })
@@ -158,11 +158,25 @@ $(document).ready(function(){
            $("#out2_info").css("display","none");
       })
 
+      //光模块 搜索按钮
+      $("#query_gmk").click(function () {
+          //隐藏遮罩
+          hideMask();
+          //隐藏该搜索框
+          $("#out_gmk").css("display","none");
+          //input_gmk 输入框ID， gmk_search -AJAX URL， gmk_table 预定义的显示表。
+          postFastQuery("input_gmk","gmk/info","gmk_table","#info_gmk");
+      })
+      //光模块显示页面的搜索按钮响应
+      $("#info_gmk_query").click(function () {
 
-
+          //input_gmk 输入框ID， gmk_search -AJAX URL， gmk_table 预定义的显示表。
+          // "#info_gmk"隐藏的DIV
+          postFastQuery("info_gmk_inp","gmk/info","gmk_table","#info_gmk");
+      })
         // ip_name 输入框的值，以FAST方式将输入框的值上传到后台服务器
-      function  postFastQuery(ip_name) {
-           var data = {};
+      function  postFastQuery(ip_name,toUrl,toTabel,showDIV) {
+        var data = {};
         var toolsname = $("#"+ip_name).val();
         data["toolsname"] = toolsname;
         data["type"] = "fast"   ;
@@ -173,11 +187,10 @@ $(document).ready(function(){
         var i = 1;
         var j = 0;
         //console.log(toolsname);
-
-
           $.ajax({
          type : "get",
-         url : "search-post",
+         //url : "search-post",
+         url : toUrl,
          data : data,
          async : true,
          success : function(ret){
@@ -193,10 +206,11 @@ $(document).ready(function(){
                  }
                  $("#index_c1").css("display","none");
                  $("#search_row").css("display","none");
-                 $("#main_3").css("display","inline");
-                 var table = document.getElementById("myTable");
+                 //$("#main_3").css("display","inline");
+                 $(showDIV).css("display","inline");
+                 var table = document.getElementById(toTabel);
                  var rowNum=table.rows.length;
-                    for (i=1;i<rowNum;i++)
+                 for (i=1;i<rowNum;i++)
                     {
                         table.deleteRow(i);
                         rowNum=rowNum-1;
@@ -213,7 +227,8 @@ $(document).ready(function(){
 
                         if(j==Object.keys(item).length-1){
                             var  str = i  ;
-                            row.insertCell(j).innerHTML =item[key] +"   "+"<button type=\"button\" class='btn outbut' value="+str+" id='out_bt'>出库</button>" ;
+                            row.insertCell(j).innerHTML= item[key];
+                            row.insertCell(j+1).innerHTML = "   "+"<button type=\"button\" class='btn outbut' value="+str+" id='out_bt'>出库</button>" ;
                         }else {
                              row.insertCell(j).innerHTML =item[key]  ;
                         }
@@ -235,6 +250,7 @@ $(document).ready(function(){
         $("#mask").css("width",$(document).width());
         $("#mask").show();
     }
+      //弹出成功 提示框
       function success() {
           $("#dh_result").css("display","block");
            setTimeout(function(){

@@ -55,11 +55,20 @@ $(document).ready(
             showMask();
             $("#gengxin").css("display","block");
         });
-        // 点击后弹出光模块搜索
+        // 打开光模块搜索
         $("#gMKout").click(function(){
             showMask();
-            $("#gengxin").css("display","block");
+            var margintop = $(document).scrollTop()+100;
+            $("#out_gmk").css("margin-top",(margintop));
+            $("#out_gmk").css("display","block");
         });
+        // 关闭光模块搜索
+        $("#cancel_gmk").click(function(){
+            hideMask();
+            $("#out_gmk").css("display","none");
+        });
+
+        //入库页面的关闭按钮
       $("#close").click(function(){
             hideMask();
             $("#gengxin").css("display","none");
@@ -95,6 +104,8 @@ $(document).ready(
         //出库按钮点击
       $("#out").click(function () {
           showMask();
+          var margintop = $(document).scrollTop()+100;
+          $("#out_info").css("margin-top",(margintop));
           $("#out_info").css("display","block");
       });
 
@@ -106,10 +117,8 @@ $(document).ready(
     }
     //隐藏遮罩层
     function hideMask(){
-
         $("#mask").hide();
     }
-
 
 
     }
