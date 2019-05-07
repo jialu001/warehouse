@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'users.apps.UsersConfig',
     'chengzaiwang.apps.ChengzaiwangConfig',
     'operation.apps.OperationConfig',
+    'guangMoKuai.apps.GuangmokuaiConfig',
 
 ]
 

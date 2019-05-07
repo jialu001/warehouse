@@ -20,19 +20,15 @@ df = pd.read_excel('2019031302.xlsx')
 for i in range((int(df.__len__()))):
     for j in range(int(df.columns.size)):
         cell = str(df.columns[j])
-
         str1 = (df[i:(i + 1)][cell].to_string())
         test = df[i:(i + 1)][cell].get_values()
+        #时间格式的时候 只取前40
         if (type(test[0]) == np.datetime64):
             str1 = (str)(test[0])[:10]
             print(str1)
         else:
             str1 = ((str)(test[0]))
-
-
         print(str1)
-
-
         if j == 0:
             fengongsi_r = str1
         if j == 1:

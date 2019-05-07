@@ -51,10 +51,15 @@ $(document).ready(
 
       });
         //入库按钮点击
-      $("#zeng").click(function(){
+        $("#zeng").click(function(){
             showMask();
             $("#gengxin").css("display","block");
-      });
+        });
+        // 点击后弹出光模块搜索
+        $("#gMKout").click(function(){
+            showMask();
+            $("#gengxin").css("display","block");
+        });
       $("#close").click(function(){
             hideMask();
             $("#gengxin").css("display","none");
