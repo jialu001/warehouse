@@ -40,6 +40,7 @@ for i in range((int(df.__len__()))):
         if j == 4:
             sn_r = str1
         if j == 5:
+
             rukushijian_r = str1
         if j == 6:
             rukudidian_r = str1

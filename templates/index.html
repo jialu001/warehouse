@@ -14,7 +14,7 @@
   <link href="../media/css/bootstrap-4.0.0.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-  <link href="../media/css/mycss_2.css" rel="stylesheet">
+  <link href="../media/css/mycss_4.css" rel="stylesheet">
   <link href="../media/css/indexCSS1.css" rel="stylesheet">
   <link rel="shortcut icon" href="../media/images/favicon.ico" />
   <script src="../media/js/jquery-3.2.1.min.js"></script>
@@ -176,7 +176,8 @@
   <div id="gengxin" class="xinxibiao container" >
       <!-- 弹框表格 用于采集信息 -->
             <div class="row" style="margin-top: 20px;">
-                <div class="col-12">
+                <div style="width: 50%;height:80%;">
+                    <div class="col-12">
                     <div class="youduiqi">
                       <label><h5>分公司:</h5></label>
                         <input class="myinp " type="text"  id="shuruk" placeholder="分公司">
@@ -184,12 +185,12 @@
                     </div>
                 <div class="col-12 ">
                     <div class="youduiqi">
-                 <label><h5>名字:</h5></label>
+                 <label><h5>备件名称:</h5></label>
                 <input type="text" class="myinp " id="shuruk" placeholder="名字">
                 </div>
                     </div>
                 <div class="col-12 "><div class="youduiqi">
-                 <label><h5>型号:</h5></label>
+                 <label><h5>规格型号:</h5></label>
                 <input type="text" class="myinp " id="shuruk" placeholder="型号">
                 </div>
                 </div>
@@ -203,16 +204,21 @@
                 <input type="text" class="myinp " id="shuliang" placeholder="">
                 </div>
                 </div>
-                <div class="col-12 "><div class="youduiqi">
+                       <div class="col-12 "><div class="youduiqi">
                  <label><h5></h5></label>
                 <input type="text" class="myinp " id="shuruk" placeholder="">
                 </div>
                 </div>
-                <div class="col-12 "><div class="youduiqi">
+
+                    <!-- 左侧结束 -->
+                </div>
+                <div style="width: 50%;height:80%;">
+                 <div class="col-12 "><div class="youduiqi">
                  <label><h5></h5></label>
                 <input type="text" class="myinp " id="shuruk" placeholder="">
                 </div>
                 </div>
+
                 <div class="col-12 "><div class="youduiqi">
                  <label><h5></h5></label>
                 <input type="text" class="myinp " id="shuruk" placeholder="">
@@ -237,15 +243,30 @@
                 <input type="text" class="myinp " id="shuruk" placeholder="">
                 </div>
                 </div>
-                <div class="col-12 ">
-                <div class="juzhong">
-                     <button type="button" class="btn" id="save">保存</button>
-                    <button type="button" class="btn" id="close">取消</button>
                 </div>
+            </div>
+                <div class="row "style="margin-top: 2%;">
+
+                    <button type="button" class="btn leftmovelittle" id="gengxin_auto">辅助填写</button>
+                     <button type="button" class="btn leftmovelittle" id="save">保存</button>
+                    <button type="button" class="btn leftmovelittle" id="close">取消</button>
+
+                </div>
+                <div class="row" >
+                   <h5 class="leftmovelittle">提示: 辅助填写不会填写关键内容 </h5>
                 </div>
                  </div>
-  </div>
 
+   <!-- 入库类型选择 -->
+ <div id="ruku_select" class="xinxibiao container" style="height: 180px;display:none;margin-top: 200px;z-index: 1003">
+      <h4>请选择入库类型</h4>
+       <button type="button" class="btn" id="ruku_czw">承载网</button>
+       <button type="button" class="btn" id="ruku_gmk">光模块</button>
+       <button type="button" class="btn" id="ruku_169">169网</button>
+       <h5 class="page-header"></h5>
+       <br>
+       <button type="button" class="btn" id="ruku_no">取消</button>
+  </div>
 <!-- 初始显示区域 -->
   <div class="container" id="index_c1">
     <!-- Jumbotron Header -->
@@ -342,7 +363,7 @@
 
   <!-- Bootstrap core JavaScript -->
  <script src="../media/js/jquery.cookie.js"></script>
-  <script src="../media/js/indexC3.js" ></script>
+  <script src="../media/js/indexC5.js" ></script>
 </body>
 
 	

@@ -1,9 +1,9 @@
 $(document).ready(
     function(){
-        var  tishi = {"分公司":"如：广州分公司","名字":"设备分类，如：A9K备件","型号":"设备型号","类型":"所属厂家：如思科"
-        ,"sn码":"SN码","入库时间":"入库时间","入库地点":"入库地点，如太阳城","数量":"数量","货位号":"所在库房的位置",
+        var  tishi = {"分公司":"如：广州分公司","备件名称":"设备分类，如：A9K备件","规格型号":"设备型号","设备类型":"所属厂家：如思科"
+        ,"sn码":"SN码","订单号":"","入库地点":"入库地点，如太阳城","数量":"数量","货位号":"所在库房的位置",
         "所属网络":"如承载网","资产标签":"资产标签 可不填","备注":"其他信息"};
-        var idset = ["fenggongsi","name","xinghao","leixing","sn","rukushijian","rukudidian",
+        var idset = ["fenggongsi","name","xinghao","leixing","sn","dingdanhao","rukudidian",
             "shuliang","huoweihao","suoshuwangluo","zichanbiaoqian","beizhu"];
         var iptoS ={};
         var ptag = document.getElementsByTagName("h5");
@@ -55,7 +55,29 @@ $(document).ready(
         //入库按钮点击
         $("#zeng").click(function(){
             showMask();
+             var margintop = $(document).scrollTop()+100;
+            $("#ruku_select").css("margin-top",(margintop));
+            $("#ruku_select").css("display","block");
+        });
+        //选择页面 取消按钮
+         $("#ruku_no").click(function(){
+            hideMask();
+            $("#ruku_select").css("display","none");
+        });
+         //进入承载网入库填写页面
+         $("#ruku_czw").click(function(){
+            $("#ruku_select").css("display","none");
+            var margintop = $(document).scrollTop();
+            $("#gengxin").css("margin-top",(margintop));
             $("#gengxin").css("display","block");
+        });
+         //辅助填写
+          $("#gengxin_auto").click(function(){
+              fuzhuInfo = ["广州分公司","A9K","","思科","","","太阳城",
+                  "1","","承载网","暂无","某工程入库"];
+           for(i=0;i<shuruku.length;i++){
+              shuruku[i].value = fuzhuInfo[i];
+           }
         });
         // 打开光模块搜索
         $("#gMKout").click(function(){
@@ -64,6 +86,7 @@ $(document).ready(
             $("#out_gmk").css("margin-top",(margintop));
             $("#out_gmk").css("display","block");
         });
+
         // 关闭光模块搜索
         $("#cancel_gmk").click(function(){
             hideMask();
