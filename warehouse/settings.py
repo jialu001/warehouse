@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'chengzaiwang.apps.ChengzaiwangConfig',
     'operation.apps.OperationConfig',
     'guangMoKuai.apps.GuangmokuaiConfig',
-
+    'yi69.apps.Yi69Config',
 ]
 
 MIDDLEWARE = [

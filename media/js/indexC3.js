@@ -39,6 +39,8 @@ $(document).ready(
                      hideMask();
                      $("#gengxin").css("display","none");
                      $("#dh_result").css("display","block");
+                     var margintop = $(document).scrollTop()+50;
+                     $("#dh_result").css("margin-top",(margintop));
                      setTimeout(function(){
                          $("#dh_result").css("display","none");
                      },1000);
@@ -102,12 +104,12 @@ $(document).ready(
              });
       });
         //出库按钮点击
-      $("#out").click(function () {
-          showMask();
-          var margintop = $(document).scrollTop()+100;
-          $("#out_info").css("margin-top",(margintop));
-          $("#out_info").css("display","block");
-      });
+      // $("#out").click(function () {
+      //     showMask();
+      //     var margintop = $(document).scrollTop()+100;
+      //     $("#out_info").css("margin-top",(margintop));
+      //     $("#out_info").css("display","block");
+      // });
 
 
     function showMask(){

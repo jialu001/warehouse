@@ -44,6 +44,8 @@ urlpatterns = [
     path('op/', include('operation.urls')),
     #将gmk里面的url加入
     path('gmk/', include('guangMoKuai.urls')),
+    # 将169里面的url加入
+    path('169/', include('yi69.urls')),
     path('showinfo', info_post1, name='用户页面跳转'),
     path('contactUs', to_contact.to_Con, name='用户页面跳转'),
 ]

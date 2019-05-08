@@ -10,6 +10,11 @@ $(document).ready(function(){
        var iptoS ={};
        var ajaxret = [];
        var retID ;
+       var urlID = 0;
+       // 0 - czw ; 1 -- gmk ; 2 --169
+       var urlList = ["search-post","gmk/info","169/info"];
+       var resTabel = ["myTable","gmk_table","169_table"];
+       var resDIV =["#main_3","#info_gmk","#info_169"];
        var searchIsDisplay = 0;
         for(var key in tishi){
                  $("#SEARCH_DIV").append(
@@ -27,10 +32,11 @@ $(document).ready(function(){
                     "<button type='button' class='btn' id='search_btn0' style='margin-left: 70%;'>搜索</button>" +
                "</div>");
         var test = 1
-
+        // enter 按键响应
       $('#search_input0').keydown(function(e){
         if(e.keyCode==13){
-            postFastQuery("search_input0","search-post","myTable","#main_3");
+            postFastQuery("search_input0",urlList[urlID],resTabel[urlID],resDIV[urlID]);
+
         }
         });
 
@@ -81,17 +87,17 @@ $(document).ready(function(){
                  });
       });
 
-      //结果页面的搜索按钮
+      //显示结果页面的搜索按钮
       $("#query1").click(function () {
           postFastQuery("input1","search-post","myTable","#main_3");
       })
 
-      //入库的搜索按钮
-      $("#query2").click(function () {
-          postFastQuery("input2","search-post","myTable","#main_3");
-          hideMask();
-          $("#out_info").css("display","none");
-      })
+      //出库的搜索按钮
+      // $("#query2").click(function () {
+      //     postFastQuery("input2","search-post","myTable","#main_3");
+      //     hideMask();
+      //     $("#out_info").css("display","none");
+      // })
 
         //入库的取消按钮
       $("#cancel2").click(function () {
@@ -101,9 +107,9 @@ $(document).ready(function(){
 
         //index页面快捷查询控制
       $("#formquery").click(function(){
-            postFastQuery("search_input0","search-post","myTable","#main_3");
+            postFastQuery("search_input0",urlList[urlID],resTabel[urlID],resDIV[urlID]);
       });
-
+        //详细搜索页面DIV控制
       $("#close_search").click(function () {
           if(searchIsDisplay==0){
                $("#SEARCH_DIV").css("display","none");
@@ -135,7 +141,7 @@ $(document).ready(function(){
            console.log("距离顶部位置"+$(document).scrollTop());
       })
 
-      // out2_info 的确认按钮
+      // 出库 的确认按钮
         $("#out_yes").click(function () {
            var itemID = $(this).attr("value")-1;
            var Oip = {};
@@ -152,7 +158,7 @@ $(document).ready(function(){
 
 
       })
-      // out2_info 的取消按钮
+      // 出库的取消按钮
       $("#out_no").click(function () {
           hideMask();
            $("#out2_info").css("display","none");
@@ -174,6 +180,20 @@ $(document).ready(function(){
           // "#info_gmk"隐藏的DIV
           postFastQuery("info_gmk_inp","gmk/info","gmk_table","#info_gmk");
       })
+
+      //下拉菜单 更改URL ID与按钮显示内容 --提升用户体验
+      $("#dropdown-gmk").click(function () {
+             $("#dropdown-btn").text("光模块");
+             urlID = 1;
+      })
+      $("#dropdown-169").click(function () {
+             $("#dropdown-btn").text("169网");
+             urlID = 2;
+      })
+      $("#dropdown-czw").click(function () {
+             $("#dropdown-btn").text("承载网");
+             urlID = 0;
+      })
         // ip_name 输入框的值，以FAST方式将输入框的值上传到后台服务器
       function  postFastQuery(ip_name,toUrl,toTabel,showDIV) {
         var data = {};
@@ -182,8 +202,6 @@ $(document).ready(function(){
         data["type"] = "fast"   ;
         var email =$.cookie('email');
         data["email"] = email;
-        var rownum = 0;
-        var column_len = 15;
         var i = 1;
         var j = 0;
         //console.log(toolsname);

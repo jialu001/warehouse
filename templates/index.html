@@ -20,13 +20,14 @@
   <script src="../media/js/jquery-3.2.1.min.js"></script>
   <script src="../media/js/popper.min.js"></script>
   <script src="../media/js/bootstrap-4.0.0.js"></script>
-  <script src="../media/js/indexContro5.js"></script>
+  <script src="../media/js/indexContro7.js"></script>
+  <link href="../media/css/dropdown1.css" rel="stylesheet">
 
 </head>
 
 <body>
 
-  <!-- Navigation -->
+  <!-- 导航栏 -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
       <a class="navbar-brand" href="index.html">主页</a>
@@ -76,7 +77,7 @@
       <button type="button" class="btn" id="out_no">取消</button>
   </div>
 
-  <!-- 隐藏的搜索结果表-->
+  <!-- LEVEL2+ id0搜索结果表-->
 <div id="main_3" >
         <!-- 搜索结果的显示页面-->
         <div style="width: 100%;padding-top:10px;padding-left:5%;height: 60px;border-color: #71dd8a;border-width: thin;border-style: dashed;">
@@ -105,7 +106,7 @@
     </tbody>
 </table>
 		</div>
-
+<!-- LEVEL1 id1光模块显示DIV -->
 <div id="info_gmk" style="display: none">
         <!-- 搜索结果的显示页面-->
         <div style="width: 100%;padding-top:10px;padding-left:5%;height: 60px;border-color: #71dd8a;border-width: thin;border-style: dashed;">
@@ -126,16 +127,45 @@
     </tbody>
 </table>
 		</div>
+  <!-- LEVEL2 id2 169显示DIV -->
+<div id="info_169" style="display: none">
+        <!-- 搜索结果的显示页面-->
+        <div style="width: 100%;padding-top:10px;padding-left:5%;height: 60px;border-color: #71dd8a;border-width: thin;border-style: dashed;">
+            <!-- 显示页面的搜索框-->
+        <input class="input-medium search-query" type="text" placeholder="支持模糊查询光模块(含有)" id="info_169_inp"/> <button type="button" class="btn" id="info_169_query">快捷查询</button>
+        </div>
+
+        <table class="table table-hover" id="169_table" style="width:90%;margin-left: 5%;">
+             <!-- 显示页面的table -->
+    <thead>
+      <tr>
+        <th>ID</th>
+          <th>厂家</th>
+          <th>设备名称</th>
+          <th>型号</th>
+          <th>序列号</th>
+          <th>数量</th>
+          <th>柜位号</th>
+          <th>备注</th>
+          <th>工程</th>
+          <th>资产标签</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+		</div>
+
   <!-- 中间提示按钮 -->
   <button type="button" class="btn btn-success setcenter btn-lg" id="dh_result"  >成功</button>
 <!-- 遮罩层 -->
     <div id="mask" class="mask "></div>
 <!-- 设备出库弹框表1 -->
-  <div id="out_info" class="xinxibiao container" style="height: 180px;display: none;margin-top: 200px;z-index: 1003">
-      <h4>请输入你想出库设备的配件名称或规格型号或序列号</h4>
-          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="input2"/> <button type="button" class="btn" id="query2">快捷查询</button>
-          <button type="button" class="btn" id="cancel2">取消</button>
-  </div>
+{#  <div id="out_info" class="xinxibiao container" style="height: 180px;display: none;margin-top: 200px;z-index: 1003">#}
+{#      <h4>请输入你想出库设备的配件名称或规格型号或序列号</h4>#}
+{#          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="input2"/> <button type="button" class="btn" id="query2">快捷查询</button>#}
+{#          <button type="button" class="btn" id="cancel2">取消</button>#}
+{#  </div>#}
 <!-- 光模块出库弹框表 -->
   <div id="out_gmk" class="xinxibiao container" style="height: 180px;display: none;margin-top: 200px;z-index: 1003">
       <h4>请输入你想出库光模块相关信息</h4>
@@ -216,7 +246,7 @@
                  </div>
   </div>
 
-<!-- 下方四块布局区域 -->
+<!-- 初始显示区域 -->
   <div class="container" id="index_c1">
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
@@ -226,7 +256,17 @@
       <p class="lead">
           系统介绍：快捷查询 仅支持配件名称，规格型号和序列号
       </p>
-          <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="search_input0"/> <button type="button" class="btn" id="formquery">快捷查询</button>
+        <!-- 下拉菜单  -->
+      <div class="dropdown">
+        <button class="dropbtn btn" id="dropdown-btn">承载网</button>
+        <div class="dropdown-content">
+            <li id="dropdown-gmk">光模块</li>
+            <li id="dropdown-169">169网</li>
+            <li id="dropdown-czw">承载网</li>
+        </div>
+      </div>
+      <input class="input-medium search-query" type="text" placeholder="支持模糊查询(含有)" id="search_input0"/>
+      <button type="button" class="btn" id="formquery">快捷查询</button>
     </header>
 
     <!-- Page Features -->
@@ -254,24 +294,24 @@
                 设备入库时填写 </br> 权限要求：2 </p>
           </div>
           <div class="card-footer">
-            <a id="zeng" class="btn btn-primary">点击填写表格</a>
+            <a id="zeng" class="btn btn-primary">点击</a>
           </div>
         </div>
       </div>
 
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card h-100">
-          <img class="card-img-top" src="../media/images/image3.jpg" alt="">
-          <div class="card-body">
-            <h4 class="card-title">产品出库</h4>
-              <p class="card-text"> 非光模块相关设备出库 </br>
-                权限要求：3</p>
-          </div>
-          <div class="card-footer">
-            <a id="out" class="btn btn-primary">进入</a>
-          </div>
-        </div>
-      </div>
+{#      <div class="col-lg-3 col-md-6 mb-4">#}
+{#        <div class="card h-100">#}
+{#          <img class="card-img-top" src="../media/images/image3.jpg" alt="">#}
+{#          <div class="card-body">#}
+{#            <h4 class="card-title">产品出库</h4>#}
+{#              <p class="card-text"> 非光模块相关设备出库 </br>#}
+{#                权限要求：3</p>#}
+{#          </div>#}
+{#          <div class="card-footer">#}
+{#            <a id="out" class="btn btn-primary">进入</a>#}
+{#          </div>#}
+{#        </div>#}
+{#      </div>#}
 
       <div class="col-lg-3 col-md-6 mb-4">
         <div class="card h-100">
@@ -302,7 +342,7 @@
 
   <!-- Bootstrap core JavaScript -->
  <script src="../media/js/jquery.cookie.js"></script>
-  <script src="../media/js/indexC2.js" ></script>
+  <script src="../media/js/indexC3.js" ></script>
 </body>
 
 	
