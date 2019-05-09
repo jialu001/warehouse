@@ -80,6 +80,9 @@ body {
 .leftmovelittle{
     margin-left: 2%;
 }
+.leftmove5{
+    margin-left: 5%;
+}
 #dh_result{
     z-index: 1002;
     display: none;
@@ -94,6 +97,9 @@ body {
 .backgSet{
     background-color: #c6c8ca;
     padding-top: 3%;
+}
+.haveaBorder{
+     border: medium solid #aaaaaa;
 }
 @media screen and (max-width: 1200px) {
     .youduiqi{

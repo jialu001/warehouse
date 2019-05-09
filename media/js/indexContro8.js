@@ -6,6 +6,7 @@ $(document).ready(function(){
         "所属网络":"如承载网","资产标签":"资产标签 可不填","备注":"其他信息"};
        var idset = ["fenggongsi","name","xinghao","leixing","sn","rukushijian","rukudidian",
             "shuliang","huoweihao","suoshuwangluo","zichanbiaoqian","beizhu"];
+
        //上传后台的iptoS
        var iptoS ={};
        var ajaxret = [];

@@ -4,7 +4,6 @@ $(document).ready(function() {
          var email =$.cookie('email');
          iptoS["email"] = email;
 
-
           $.ajax({
          type : "get",
          url : "users/info",
