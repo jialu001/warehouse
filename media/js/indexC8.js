@@ -70,7 +70,36 @@ $(document).ready(
             var margintop = $(document).scrollTop();
             $("#ruku_table_gmk").css("margin-top",(margintop));
             $("#ruku_table_gmk").css("display","block");
+            getInfo("gmk/allinfo");
         });
+
+         $("#dropdown-content-gmk-right").on("click","li",function (){
+
+             $("#dropdown-1-r").text($(this).text());
+         });
+
+         $("#dropdown-hw").click(function () {
+                $("#dropdown-1-s").text("华为");
+                setdropdown(0,7,"01",hwgmk);
+         })
+         $("#dropdown-sk").click(function () {
+             $("#dropdown-1-s").text("思科");
+              setdropdown(0,7,"01",skgmk);
+         })
+         $("#dropdown-h3").click(function () {
+             $("#dropdown-1-s").text("H3C");
+              setdropdown(0,7,"01",h3gmk);
+         })
+         $("#dropdown-br").click(function () {
+             $("#dropdown-1-s").text("贝尔");
+              setdropdown(0,7,"01",brgmk);
+
+         })
+         $("#dropdown-dp").click(function () {
+             $("#dropdown-1-s").text("迪普");
+              setdropdown(0,7,"01",dpgmk);
+
+         })
          //光模块取消按钮
          $("#gmk_close").click(function(){
             hideMask();
@@ -250,6 +279,86 @@ $(document).ready(
     }
 
 
+    var hwgmk=[];
+    var h3gmk=[];
+    var skgmk=[];
+    var dpgmk=[];
+    var brgmk=[];
+    function getInfo(url) {
+
+          $.ajax({
+         type : "get",
+         //url : "search-post",
+         url : url,
+         data : " ",
+         async : true,
+         success : function(ret){
+                 ret.forEach(function (item) {
+                      var cjID = 0;
+                    for (var key in item) {
+                      if(key=="changjia"){
+                          if(item[key]=="华为"){
+                                cjID =1;
+                          }
+                          if(item[key]=="思科"){
+cjID =2;
+                          }
+                          if(item[key]=="H3C"){
+cjID =3;
+                          }
+                          if(item[key]=="贝尔"){
+cjID =4;
+                          }
+                          if(item[key]=="迪普"){
+cjID =5;
+                          }
+                      }
+                       if(key=="xinghao"){
+                          if( cjID ==1){
+                                hwgmk.push(item[key]);
+                          }
+                            if( cjID ==2){
+                                skgmk.push(item[key]);
+                          }
+                          if( cjID ==3){
+                                h3gmk.push(item[key]);
+                          }
+                           if( cjID ==4){
+                                brgmk.push(item[key]);
+                          }
+                            if( cjID ==5){
+                                dpgmk.push(item[key]);
+                          }
+                      }
+                      else {
+                          continue;
+                      }
+                    }//for 结束
+                 })
+                }
+            });
+
+    }
+
+    function setdropdown(start,end,upAndDown,changJia) {
+             $("#dropdown-content-gmk-right").empty();
+             var contNum = 6;
+             for (i=start;((i<end)&&(i<changJia.length));i++){
+                 if(i<contNum ){
+                       $("#dropdown-content-gmk-right").append(
+                   "<li >"+ changJia[i] +"</li>"
+                    );
+                 }
+                  else if(i==contNum){
+                     if(upAndDown =="01"){
+                            $("#dropdown-content-gmk-right").append(
+                   "<li id='right-down'>"+ "下一页" +"</li>"
+                    );
+                     }
+
+                 }
+             }//for循环结束
+    }
 
     }
     );
