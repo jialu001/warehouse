@@ -23,33 +23,34 @@ $(document).ready(
             i++;
         }
         console.log("已设置输入框的相关参数");
-        //入库页面确认
+        //chengzaiwang页面确认
         $("#save").click(function(){
            console.log("准备获取输入框的相关参数");
            for(i=0;i<shuruku.length;i++){
               iptoS[idset[i]]=shuruku[i].value;
            }
            console.log("已获取输入框的相关参数，准备上传至服务器");
-             $.post("add",
-                 iptoS,
-                    function(data,status){
-                alert(data["info"]);
-
-                if(data["type"]==1){
-                     hideMask();
-                     $("#gengxin").css("display","none");
-                     $("#dh_result").css("display","block");
-                     var margintop = $(document).scrollTop()+50;
-                     $("#dh_result").css("margin-top",(margintop));
-                     setTimeout(function(){
-                         $("#dh_result").css("display","none");
-                     },1000);
-                }else {
-                    //此处进行权限不够操作
-
-                    return ;
-                }
-                 });
+            alert("已提交入库申请，等待管理员审核");
+              hideMask();
+            $("#gengxin").css("display","none");
+             // $.post("add", iptoS, function(data,status){
+             //    alert(data["info"]);
+             //
+             //    if(data["type"]==1){
+             //         hideMask();
+             //         $("#gengxin").css("display","none");
+             //         $("#dh_result").css("display","block");
+             //         var margintop = $(document).scrollTop()+50;
+             //         $("#dh_result").css("margin-top",(margintop));
+             //         setTimeout(function(){
+             //             $("#dh_result").css("display","none");
+             //         },1000);
+             //    }else {
+             //        //此处进行权限不够操作
+             //
+             //        return ;
+             //    }
+             //     });
 
       });
         //入库按钮点击
@@ -75,29 +76,48 @@ $(document).ready(
 
          $("#dropdown-content-gmk-right").on("click","li",function (){
 
-             $("#dropdown-1-r").text($(this).text());
+
+             if($(this).text()=="下一页"){
+                setNext();
+             }
+             else {
+                 $("#xingHaoInfo").text("选择型号为："+($(this).text()));
+             }
+             //alert($(this).text());
+
+         });
+
+         $("#gmk_save").click(function () {
+             alert("已提交入库申请，等待管理员审核");
+              hideMask();
+            $("#ruku_table_gmk").css("display","none");
          });
 
          $("#dropdown-hw").click(function () {
                 $("#dropdown-1-s").text("华为");
-                setdropdown(0,7,"01",hwgmk);
+                setChangJiaInfo("huawei");
+                setdropdown(0,hwgmk);
          })
          $("#dropdown-sk").click(function () {
              $("#dropdown-1-s").text("思科");
-              setdropdown(0,7,"01",skgmk);
+             setChangJiaInfo("sike");
+              setdropdown(0,skgmk);
          })
          $("#dropdown-h3").click(function () {
              $("#dropdown-1-s").text("H3C");
-              setdropdown(0,7,"01",h3gmk);
+              setChangJiaInfo("h3c");
+              setdropdown(0,h3gmk);
          })
          $("#dropdown-br").click(function () {
              $("#dropdown-1-s").text("贝尔");
-              setdropdown(0,7,"01",brgmk);
+              setChangJiaInfo("beier");
+              setdropdown(0,brgmk);
 
          })
          $("#dropdown-dp").click(function () {
              $("#dropdown-1-s").text("迪普");
-              setdropdown(0,7,"01",dpgmk);
+              setChangJiaInfo("dipu");
+              setdropdown(0,dpgmk);
 
          })
          //光模块取消按钮
@@ -175,8 +195,10 @@ $(document).ready(
            }
            var email =$.cookie('email');
             ipto169["email"] = email;
-           ruKu("169/add",ipto169);
+           // ruKu("169/add",ipto169);
+               alert("已提交入库申请，等待管理员审核");
             $("#ruku_table_169").css("display","none");
+             hideMask();
         });
           //169-close
           $("#169_close").click(function(){
@@ -263,7 +285,7 @@ $(document).ready(
                     function(data,status){
                 alert(data["info"]);
                 if(data["type"]==1){
-                     hideMask();
+
                      $("#gengxin").css("display","none");
                      $("#dh_result").css("display","block");
                      var margintop = $(document).scrollTop()+50;
@@ -280,10 +302,16 @@ $(document).ready(
 
 
     var hwgmk=[];
+    hwgmk[0] ="huawei";
     var h3gmk=[];
+    h3gmk[0] = "h3c";
     var skgmk=[];
+    skgmk[0] = "sike";
     var dpgmk=[];
+    dpgmk[0] = "dipu";
     var brgmk=[];
+    brgmk[0] = "beier";
+    var nextInfo = ["",""];
     function getInfo(url) {
 
           $.ajax({
@@ -340,25 +368,59 @@ cjID =5;
 
     }
 
-    function setdropdown(start,end,upAndDown,changJia) {
+    function setdropdown(start,changJia) {
              $("#dropdown-content-gmk-right").empty();
-             var contNum = 6;
-             for (i=start;((i<end)&&(i<changJia.length));i++){
+             var contNum = 6+start;
+             for (i=start;((i<changJia.length-1));i++){
                  if(i<contNum ){
                        $("#dropdown-content-gmk-right").append(
-                   "<li >"+ changJia[i] +"</li>"
+                   "<li >"+ changJia[i+1] +"</li>"
                     );
                  }
                   else if(i==contNum){
-                     if(upAndDown =="01"){
                             $("#dropdown-content-gmk-right").append(
                    "<li id='right-down'>"+ "下一页" +"</li>"
                     );
-                     }
-
+                            nextInfo[0]=(contNum+1).toString();
+                            nextInfo[1]=changJia[0];
                  }
              }//for循环结束
     }
 
+    function setNext() {
+           if(nextInfo[1]=="huawei"){
+                     setdropdown(parseInt(nextInfo[0]),hwgmk);
+                 }
+           if(nextInfo[1]=="sike"){
+                     setdropdown(parseInt(nextInfo[0]),skgmk);
+                 }
+           if(nextInfo[1]=="h3c"){
+                     setdropdown(parseInt(nextInfo[0]),h3gmk);
+                 }
+           if(nextInfo[1]=="dipu"){
+                     setdropdown(parseInt(nextInfo[0]),dpgmk);
+                 }
+           if(nextInfo[1]=="beier"){
+                     setdropdown(parseInt(nextInfo[0]),brgmk);
+                 }
+    }
+
+    function setChangJiaInfo(str) {
+        if(str=="huawei"){
+            $("#changJiaInfo").text("选择厂家为：华为");
+        }
+         if(str=="sike"){
+            $("#changJiaInfo").text("选择厂家为：思科");
+        }
+         if(str=="h3c"){
+            $("#changJiaInfo").text("选择厂家为：华三");
+        }
+         if(str=="dipu"){
+            $("#changJiaInfo").text("选择厂家为：迪普");
+        }
+         if(str=="beier"){
+            $("#changJiaInfo").text("选择厂家为：贝尔");
+        }
+    }
     }
     );
