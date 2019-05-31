@@ -4,7 +4,7 @@ import pandas as pd
 import numpy as np
 import django
 pwd = os.path.dirname(os.path.realpath(__file__))
-sys.path.append(pwd + "../")
+sys.path.append( "../")
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "warehouse.settings")
 django.setup()
 from guangMoKuai.models import guangMoKuai

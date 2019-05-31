@@ -11,3 +11,4 @@ class yi69(models.Model):
     beizhu =  models.CharField(max_length=200,null=True,blank=True)
     gongcheng =  models.CharField(max_length=200,null=True,blank=True)
     zichanbiaoqian = models.CharField(max_length=50,null=True,blank=True)
+    status =models.CharField(max_length=50,default="未出库")

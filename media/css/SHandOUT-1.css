@@ -1,0 +1,22 @@
+#out2_info{
+  height: 50%;display: none;margin-top: 200px;z-index:1004;
+  border-radius: 6px;
+  padding-top: 2%;
+  padding-left: 2%;
+   position: absolute;
+        margin-left: 30%;
+        width: 60%;
+        height: 400px;
+        background-color: rgb(255, 251, 240);
+}
+#shenhe_tk{
+    height: 50%;display: none;margin-top: 20px;z-index:1004;
+  border-radius: 6px;
+  padding-top: 2%;
+  padding-left: 2%;
+   position: absolute;
+        margin-left: 10%;
+        width: 80%;
+        height: 800px;
+        background-color: rgb(255, 251, 240);
+}

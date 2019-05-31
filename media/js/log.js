@@ -28,9 +28,9 @@
                  async : false,
                  success : function(data,status){
                      if (status=="success"){
-                          alert(data["info"]+"\n"+
-                      data["type"]  +"\n"+
-                     location.href);
+                     //      alert(data["info"]+"\n"+
+                     //  data["type"]  +"\n"+
+                     // location.href);
 
                           if(data["type"] =="t"){
                                 check = true ;
@@ -40,7 +40,7 @@
                      }
                  }
              });
-        alert(check);
+        //alert(check);
         return check;
     });
 

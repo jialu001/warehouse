@@ -31,10 +31,10 @@ def add_post(request):
 
 
         print("取出关键数据完毕,准备写入数据")
-        chengzaiwang.objects.get_or_create(fengongsi=fenggongsi, leixing=leixing, xinghao=xinghao, name=name, \
+        n=chengzaiwang.objects.create(fengongsi=fenggongsi, leixing=leixing, xinghao=xinghao, name=name, \
                                            sn=sn, rukudidian=rukudidian, dingdanhao=dingdanhao, num=shuliang, \
                                            huoweihao=huoweihao, suoshuwangluo=suoshuwangluo,
-                                           zichanbiaoqian=zichanbiaoqian, beizhu=beizhu,rukushijian=rukushijian)
+                                           zichanbiaoqian=zichanbiaoqian, beizhu=beizhu,rukushijian=rukushijian,status="入库申请中")
         print("写入数据完毕")
         #操作记录存入后台
         operation.objects.create(name=useret.email, level=useret.level, op_type="入库", \
@@ -42,7 +42,7 @@ def add_post(request):
         ret["info"] = "已写入数据库 请核实"
         #1表示成功
         ret["type"] = 1
-
+        ret['id'] = n.id
     else:
         print("用户权限不够")
         ret["info"] = "权限不够"

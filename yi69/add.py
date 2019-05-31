@@ -27,16 +27,19 @@ def add_post(request):
 
 
         print("取出关键数据完毕,准备写入数据")
-        yi69.objects.get_or_create(changjia=cj, mingcheng=name, xinghao=xinghao, sn=sn, \
+        n=yi69.objects.create(changjia=cj, mingcheng=name, xinghao=xinghao, sn=sn, \
                                            num=sl, place=hgh, beizhu=bz, gongcheng=gc, \
-                                           zichanbiaoqian=zichanbiaoqian)
+                                           zichanbiaoqian=zichanbiaoqian,status="入库申请中")
         print("写入数据完毕")
+        print("写入输入ID",n.id)
         #操作记录存入后台
-        operation.objects.create(name=useret.email, level=useret.level, op_type="入库", \
+        operation.objects.create(name=useret.email, level=useret.level, op_type="入库申请", \
                                  op_res=True, op_item="169网")
+        print("已记录到日志")
         ret["info"] = "已写入数据库 请核实"
         #1表示成功
         ret["type"] = 1
+        ret["id"] = n.id
 
     else:
         print("用户权限不够")

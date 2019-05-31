@@ -49,14 +49,25 @@ body {
 
 .xinxibiao{
         position: absolute;
-        margin-top: 0px;
+        margin-top: 5px;
         margin-left: 20%;
         width: 60%;
         height: 400px;
 
         background-color: rgb(255, 251, 240);
 }
-
+.maRtop5{
+    margin-top: 5px;
+}
+.maRtop20{
+     margin-top: 20px;
+}
+.have30width{
+    width: 30%;
+}
+.have30he{
+    height: 30%;
+}
 #gengxin{
     z-index: 1003;
     display: none;

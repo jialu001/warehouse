@@ -12,25 +12,20 @@ def search_post(request):
     gotemail = request.GET.get("email")
     useret = UserProfile.objects.get(email=gotemail)
 
-    print("关键字为",request.GET.get("toolsname"))
+    #print("关键字为",request.GET.get("toolsname"))
     try:
         print(request.GET.get("type"))
         if(request.GET.get("type")=="fast"):
             if (sql_detect(request.GET.get("toolsname"))):
-                print("捕获到异常，即将返回前端")
+             #   print("捕获到异常，即将返回前端")
                 raise ValueError('SQL detected')
 
-            res = chengzaiwang.objects.filter(xinghao__icontains=(request.GET.get("toolsname")))
-            if (not res):
-                res = chengzaiwang.objects.filter(name__icontains=(request.GET.get("toolsname")))
-                if (not res):
-                    res = chengzaiwang.objects.filter(sn=(request.GET.get("toolsname")))
-                    if (not res):
-                        res = chengzaiwang.objects.filter(rukudidian__icontains=(request.GET.get("toolsname")))
-            #将res序列化 放到ret里面
+
+            res = chengzaiwang.objects.filter(name__icontains=(request.GET.get("toolsname")))
+                   #将res序列化 放到ret里面
             ret=putFast(res,ret)
         elif(request.GET.get("type")=="nor"):
-            print("进入详细查询模式")
+         #   print("进入详细查询模式")
             idset = ["fenggongsi", "name", "xinghao", "leixing", "sn", "rukushijian", "rukudidian",
                      "shuliang", "huoweihao", "suoshuwangluo", "zichanbiaoqian", "beizhu"];
             res = chengzaiwang.objects.all()
@@ -48,7 +43,7 @@ def search_post(request):
 
     except Exception:
         ctx = ['error']
-        print("发现异常并返回前端",ctx)
+     #   print("发现异常并返回前端",ctx)
         ret = ctx
 
 
@@ -56,7 +51,7 @@ def search_post(request):
 
 def putFast(res,ret):
     # 将res 仅一部分json序列化 返回
-    print("进入快捷查询模式")
+ #   print("进入快捷查询模式")
 
     if (not res):
         #如果目标集为空，则返回结果集置为 null
@@ -76,7 +71,7 @@ def putFast(res,ret):
     return ret
 def putNor(res,ret):
     #将res json序列化 返回
-    print("进入正常查询模式")
+   # print("进入正常查询模式")
     if (not res):
         ret = ['null']
     for e in res:
@@ -107,11 +102,11 @@ def indexSearch(str,ret,value):
     if(str=="fenggongsi"):
         ret = ret.filter(fengongsi__icontains=value)
     elif(str=="name"):
-        print("进入name查询")
+     #   print("进入name查询")
         ret = ret.filter(name__icontains=value)
     elif (str == "xinghao"):
-        print("进入value查询")
-        print("此时value为：",value)
+       # print("进入value查询")
+       # print("此时value为：",value)
         ret = ret.filter(xinghao__icontains=value)
     return ret
 #定义一个判断字符串是否为数字的函数
@@ -126,7 +121,7 @@ def is_number(s):
 #sql注入判断
 def sql_detect(s):
     s = s.lower()
-    print("待检测字符已经转为小写", s)
+    #print("待检测字符已经转为小写", s)
     sql = ["delete","create","insert","update","drop","alter","grant","deny"]
     result = False
     for key in sql:
@@ -153,7 +148,7 @@ def compare(fat,son):
             if(fat[i] == son[j]):
                 if(j==0):
                     ist = i+1
-                    print("检测到疑似值,已保存初始位置",ist)
+                   # print("检测到疑似值,已保存初始位置",ist)
                 length=length+1
                 j=j+1
                 break
@@ -161,10 +156,9 @@ def compare(fat,son):
             else:
                 if(length>0):
 
-                    print("匹配不完整外圈返回初始位置",ist)
-                    print("此时已匹配长度为",length,"外圈长度",i)
+                   # print("此时已匹配长度为",length,"外圈长度",i)
                     i = ist
-                    print("内圈置为0")
+                    #print("内圈置为0")
                     length = 0
                     j=0
 
@@ -172,12 +166,12 @@ def compare(fat,son):
                 break
         if(length==len(son)):
             result=True
-            print("检测到目标值")
+           # print("检测到目标值")
             break
         else:
             i = i + 1
 
 
-    print("跳出循环,并输出关键字:",son,"的匹配结果",result)
+   # print("跳出循环,并输出关键字:",son,"的匹配结果",result)
 
     return result

@@ -24,41 +24,62 @@ $(document).ready(
         }
         console.log("已设置输入框的相关参数");
         //chengzaiwang页面确认
+
         $("#save").click(function(){
            console.log("准备获取输入框的相关参数");
            for(i=0;i<shuruku.length;i++){
               iptoS[idset[i]]=shuruku[i].value;
            }
            console.log("已获取输入框的相关参数，准备上传至服务器");
-            alert("已提交入库申请，等待管理员审核");
+            // alert("已提交入库申请，等待管理员审核");
               hideMask();
             $("#gengxin").css("display","none");
-             // $.post("add", iptoS, function(data,status){
-             //    alert(data["info"]);
-             //
-             //    if(data["type"]==1){
-             //         hideMask();
-             //         $("#gengxin").css("display","none");
-             //         $("#dh_result").css("display","block");
-             //         var margintop = $(document).scrollTop()+50;
-             //         $("#dh_result").css("margin-top",(margintop));
-             //         setTimeout(function(){
-             //             $("#dh_result").css("display","none");
-             //         },1000);
-             //    }else {
-             //        //此处进行权限不够操作
-             //
-             //        return ;
-             //    }
-             //     });
+             $.post("add", iptoS, function(data,status){
+                // alert(data["info"]);
+
+                if(data["type"]==1){
+                    toCache("ruku","承载网",data['id'],"");
+                     // $("#gengxin").css("display","none");
+                     // $("#dh_result").css("display","block");
+                     // var margintop = $(document).scrollTop()+50;
+                     // $("#dh_result").css("margin-top",(margintop));
+                     // setTimeout(function(){
+                     //     $("#dh_result").css("display","none");
+                     // },1000);
+                }else {
+                    //此处进行权限不够操作
+
+                    return ;
+                }
+                 });
 
       });
         //入库按钮点击
         $("#zeng").click(function(){
-            showMask();
+             // level check
+          var data = {};
+          var email =$.cookie('email');
+          data["email"] = email;
+           $.ajax({
+         type : "get",
+         url : "users/levelCheck",
+         data : data,
+         async : true,
+         success : function(ret){
+             // 1 权限仅能出库光模块
+                    if(ret["level"]=="1"){
+                        alert("权限不足");
+                        return ;
+                    }
+                    else {   showMask();
              var margintop = $(document).scrollTop()+100;
             $("#ruku_select").css("margin-top",(margintop));
             $("#ruku_select").css("display","block");
+                    }
+                }
+            });
+
+
         });
         //选择页面 取消按钮
          $("#ruku_no").click(function(){
@@ -74,23 +95,84 @@ $(document).ready(
             getInfo("gmk/allinfo");
         });
 
-         $("#dropdown-content-gmk-right").on("click","li",function (){
+         $("#dropdown-content-gmk-right-2").on("click","li",function (){
+
+
+             if($(this).text()=="下一页"){
+                setNext2();
+             }
+             else {
+                 $("#xingHaoInfo-2").text("选择型号为"+":"+($(this).text()));
+             }
+             //alert($(this).text());
+
+         });
+          $("#dropdown-content-gmk-right").on("click","li",function (){
 
 
              if($(this).text()=="下一页"){
                 setNext();
              }
              else {
-                 $("#xingHaoInfo").text("选择型号为："+($(this).text()));
+                 $("#xingHaoInfo").text("选择型号为"+":"+($(this).text()));
              }
              //alert($(this).text());
 
          });
 
          $("#gmk_save").click(function () {
-             alert("已提交入库申请，等待管理员审核");
+             var changJ = getCJinfo($("#changJiaInfo").text());
+
+             var xH =getXh($("#xingHaoInfo").text());
+
+             var num = $("#gmk_ip").val();
+
+             var data={};
+             data['cj']=changJ;
+             data['xh']=xH;
+
+             data['num']="0;"+num;
+             var email =$.cookie('email');
+             data["email"] = email;
+             var ID_gmk = (ruKu("gmk/add",data));
+               if(ID_gmk.toString() == "-1" ){
+                alert("重复操作，请等待审核");
+                hideMask();
+                $("#ruku_table_gmk").css("display","none");
+                return ;
+            }
+              // gmk needs id and num
+             toCache("ruku","gmk",ID_gmk,"");
               hideMask();
             $("#ruku_table_gmk").css("display","none");
+         });
+
+        $("#gmk_save-2").click(function () {
+
+             var changJ = getCJinfo($("#changJiaInfo-2").text());
+            //
+              var xH =getXh($("#xingHaoInfo-2").text());
+            //
+              var num = $("#gmk_ip-2").val();
+            //
+             var data={};
+             data['cj']=changJ;
+             data['xh']=xH;
+             data['num']="1"+";"+num;
+             var email =$.cookie('email');
+             data["email"] = email;
+             console.log(data);
+             var ID_gmk = (ruKu("gmk/add",data));
+               if(ID_gmk.toString() == "-1" ){
+                alert("重复操作，请等待审核");
+                hideMask();
+                $("#out_gmk").css("display","none");
+                return ;
+            }
+              // gmk needs id and num
+             toCache("出库","gmk",ID_gmk,"");
+              hideMask();
+            $("#out_gmk").css("display","none");
          });
 
          $("#dropdown-hw").click(function () {
@@ -98,20 +180,41 @@ $(document).ready(
                 setChangJiaInfo("huawei");
                 setdropdown(0,hwgmk);
          })
+         $("#dropdown-hw-2").click(function () {
+                $("#dropdown-2-s").text("华为");
+                setChangJiaInfo2("huawei");
+                setdropdown2(0,hwgmk);
+         })
          $("#dropdown-sk").click(function () {
              $("#dropdown-1-s").text("思科");
              setChangJiaInfo("sike");
               setdropdown(0,skgmk);
+         })
+         $("#dropdown-sk-2").click(function () {
+             $("#dropdown-2-s").text("思科");
+             setChangJiaInfo2("sike");
+              setdropdown2(0,skgmk);
          })
          $("#dropdown-h3").click(function () {
              $("#dropdown-1-s").text("H3C");
               setChangJiaInfo("h3c");
               setdropdown(0,h3gmk);
          })
+         $("#dropdown-h3-2").click(function () {
+             $("#dropdown-2-s").text("H3C");
+              setChangJiaInfo2("h3c");
+              setdropdown2(0,h3gmk);
+         })
          $("#dropdown-br").click(function () {
              $("#dropdown-1-s").text("贝尔");
               setChangJiaInfo("beier");
               setdropdown(0,brgmk);
+
+         })
+          $("#dropdown-br-2").click(function () {
+             $("#dropdown-2-s").text("贝尔");
+              setChangJiaInfo2("beier");
+              setdropdown2(0,brgmk);
 
          })
          $("#dropdown-dp").click(function () {
@@ -120,10 +223,22 @@ $(document).ready(
               setdropdown(0,dpgmk);
 
          })
+
+        $("#dropdown-dp-2").click(function () {
+             $("#dropdown-2-s").text("迪普");
+              setChangJiaInfo2("dipu");
+              setdropdown2(0,dpgmk);
+
+         })
          //光模块取消按钮
          $("#gmk_close").click(function(){
             hideMask();
             $("#ruku_table_gmk").css("display","none");
+        });
+         //光模块2取消按钮
+         $("#gmk_close-2").click(function(){
+            hideMask();
+            $("#out_gmk").css("display","none");
         });
          //进入承载网入库填写页面
          $("#ruku_czw").click(function(){
@@ -195,8 +310,11 @@ $(document).ready(
            }
            var email =$.cookie('email');
             ipto169["email"] = email;
-           // ruKu("169/add",ipto169);
-               alert("已提交入库申请，等待管理员审核");
+            var ID_169 = (ruKu("169/add",ipto169));
+
+
+             toCache("ruku","169",ID_169,"");
+               //alert("已提交入库申请，等待管理员审核");
             $("#ruku_table_169").css("display","none");
              hideMask();
         });
@@ -213,12 +331,13 @@ $(document).ready(
               shuruku[i].value = fuzhuInfo[i];
            }
         });
-        // 打开光模块搜索
+        // 打开光模块出库NEW 528
         $("#gMKout").click(function(){
             showMask();
-            var margintop = $(document).scrollTop()+100;
+            var margintop = $(document).scrollTop()+10;
             $("#out_gmk").css("margin-top",(margintop));
             $("#out_gmk").css("display","block");
+             getInfo("gmk/allinfo");
         });
 
         // 关闭光模块搜索
@@ -261,12 +380,7 @@ $(document).ready(
              });
       });
         //出库按钮点击
-      // $("#out").click(function () {
-      //     showMask();
-      //     var margintop = $(document).scrollTop()+100;
-      //     $("#out_info").css("margin-top",(margintop));
-      //     $("#out_info").css("display","block");
-      // });
+
 
 
     function showMask(){
@@ -280,24 +394,21 @@ $(document).ready(
     }
 
     function ruKu(url,data) {
-          $.post(url,
-                 data,
-                    function(data,status){
-                alert(data["info"]);
-                if(data["type"]==1){
+          var id = -1 ;
+          $.ajax({
+         type : "post",
+         url : url,
+         data : data,
+         async : false,
+         success : function(ret){
 
-                     $("#gengxin").css("display","none");
-                     $("#dh_result").css("display","block");
-                     var margintop = $(document).scrollTop()+50;
-                     $("#dh_result").css("margin-top",(margintop));
-                     setTimeout(function(){
-                         $("#dh_result").css("display","none");
-                     },1000);
-                }else {
-                    //此处进行权限不够操作
-                    return ;
-                        }
-                 });
+             if(ret["type"]==1) {
+                 id = ret["id"];
+             }
+
+                }
+            });
+          return id;
     }
 
 
@@ -387,24 +498,6 @@ cjID =5;
              }//for循环结束
     }
 
-    function setNext() {
-           if(nextInfo[1]=="huawei"){
-                     setdropdown(parseInt(nextInfo[0]),hwgmk);
-                 }
-           if(nextInfo[1]=="sike"){
-                     setdropdown(parseInt(nextInfo[0]),skgmk);
-                 }
-           if(nextInfo[1]=="h3c"){
-                     setdropdown(parseInt(nextInfo[0]),h3gmk);
-                 }
-           if(nextInfo[1]=="dipu"){
-                     setdropdown(parseInt(nextInfo[0]),dpgmk);
-                 }
-           if(nextInfo[1]=="beier"){
-                     setdropdown(parseInt(nextInfo[0]),brgmk);
-                 }
-    }
-
     function setChangJiaInfo(str) {
         if(str=="huawei"){
             $("#changJiaInfo").text("选择厂家为：华为");
@@ -422,5 +515,120 @@ cjID =5;
             $("#changJiaInfo").text("选择厂家为：贝尔");
         }
     }
+
+     function setdropdown2(start,changJia) {
+             $("#dropdown-content-gmk-right-2").empty();
+             var contNum = 6+start;
+             for (i=start;((i<changJia.length-1));i++){
+                 if(i<contNum ){
+                       $("#dropdown-content-gmk-right-2").append(
+                   "<li >"+ changJia[i+1] +"</li>"
+                    );
+                 }
+                  else if(i==contNum){
+                            $("#dropdown-content-gmk-right-2").append(
+                   "<li id='right-down'>"+ "下一页" +"</li>"
+                    );
+                            nextInfo[0]=(contNum+1).toString();
+                            nextInfo[1]=changJia[0];
+                 }
+             }//for循环结束
+    }
+
+    function setChangJiaInfo2(str) {
+        if(str=="huawei"){
+            $("#changJiaInfo-2").text("选择厂家为：华为");
+        }
+         if(str=="sike"){
+            $("#changJiaInfo-2").text("选择厂家为：思科");
+        }
+         if(str=="h3c"){
+            $("#changJiaInfo-2").text("选择厂家为：华三");
+        }
+         if(str=="dipu"){
+            $("#changJiaInfo-2").text("选择厂家为：迪普");
+        }
+         if(str=="beier"){
+            $("#changJiaInfo-2").text("选择厂家为：贝尔");
+        }
+    }
+
+    function setNext() {
+           if(nextInfo[1]=="huawei"){
+                     setdropdown(parseInt(nextInfo[0]),hwgmk);
+                 }
+           if(nextInfo[1]=="sike"){
+                     setdropdown(parseInt(nextInfo[0]),skgmk);
+                 }
+           if(nextInfo[1]=="h3c"){
+                     setdropdown(parseInt(nextInfo[0]),h3gmk);
+                 }
+           if(nextInfo[1]=="dipu"){
+                     setdropdown(parseInt(nextInfo[0]),dpgmk);
+                 }
+           if(nextInfo[1]=="beier"){
+                     setdropdown(parseInt(nextInfo[0]),brgmk);
+                 }
+    }
+    function setNext2() {
+           if(nextInfo[1]=="huawei"){
+                     setdropdown2(parseInt(nextInfo[0]),hwgmk);
+                 }
+           if(nextInfo[1]=="sike"){
+                     setdropdown2(parseInt(nextInfo[0]),skgmk);
+                 }
+           if(nextInfo[1]=="h3c"){
+                     setdropdown2(parseInt(nextInfo[0]),h3gmk);
+                 }
+           if(nextInfo[1]=="dipu"){
+                     setdropdown2(parseInt(nextInfo[0]),dpgmk);
+                 }
+           if(nextInfo[1]=="beier"){
+                     setdropdown2(parseInt(nextInfo[0]),brgmk);
+                 }
+    }
+
+    function getCJinfo(str) {
+        if(str=="选择厂家为：华为"){
+           return "huawei";
+        }
+         if(str=="选择厂家为：思科"){
+           return "sike";
+        }
+         if(str=="选择厂家为：华三"){
+           return "h3c";
+        }
+         if(str=="选择厂家为：迪普"){
+           return "dipu";
+        }
+         if(str=="选择厂家为：贝尔"){
+           return "beier";
+        }
+
+    }
+
+    function getXh(str) {
+            str=str.split(":");
+            return str[1];
+    }
+    function toCache(op_type,op_net,item_ID,op_reason) {
+        var data = {};
+        var email =$.cookie('email');
+        data["email"] = email;
+        data["type"] = op_type;
+        data["item"] = op_net;
+        data["id"] = item_ID;
+        data["reason"] = op_reason;
+         $.ajax({
+         type : "get",
+         url : "cache/up",
+         data : data,
+         async : true,
+         success : function(ret){
+                    alert(ret["info"])
+                }
+            });
+    }
+
     }
     );

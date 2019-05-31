@@ -46,6 +46,10 @@ INSTALLED_APPS = [
     'operation.apps.OperationConfig',
     'guangMoKuai.apps.GuangmokuaiConfig',
     'yi69.apps.Yi69Config',
+    'Cache.apps.CacheConfig',
+    'gcckCache.apps.GcckcacheConfig',
+    'ywktCache.apps.YwktcacheConfig',
+    'gzclCache.apps.GzclcacheConfig',
 ]
 
 MIDDLEWARE = [

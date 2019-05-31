@@ -46,6 +46,16 @@ urlpatterns = [
     path('gmk/', include('guangMoKuai.urls')),
     # 将169里面的url加入
     path('169/', include('yi69.urls')),
+    # 将cache里面的url加入
+    path('cache/', include('Cache.urls')),
+    # 将czw里面的url加入
+    path('czw/', include('chengzaiwang.urls')),
+    # 将gcck里面的url加入
+    path('gcck/', include('gcckCache.urls')),
+    # 将ywkt里面的url加入
+    path('ywkt/', include('ywktCache.urls')),
+    # 将gzcl里面的url加入
+    path('gzcl/', include('gzclCache.urls')),
     path('showinfo', info_post1, name='用户页面跳转'),
     path('contactUs', to_contact.to_Con, name='用户页面跳转'),
 ]
