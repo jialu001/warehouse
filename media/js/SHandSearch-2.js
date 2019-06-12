@@ -237,6 +237,11 @@ $(document).ready(function(){
             var margintop = $(document).scrollTop()+50;
            $("#out3_info").css("margin-top",(margintop));
            $("#out3_info").css("display","block");
+            $("#inpt_gcck").val("");
+            $("#diaodanIp").val("");
+             $("#sheBeiIp").val("");
+                $("#duanKouIp").val("");
+                 $("#gzclPlace").val("");
 
       })
       // 出库的取消按钮
@@ -298,33 +303,45 @@ $(document).ready(function(){
 
       })
 
+    // out3 - 出库最高DIV弹框确认按钮
      $("#out3_yes").click(function () {
          var gotInfo=($("#dropdown-out3").val());
 
          var gotInfoNew = gotInfo.split(";");
          var email =$.cookie('email');
-         console.log("按钮所绑定的信息"+gotInfo);
+         //console.log("按钮所绑定的信息"+gotInfo);
+         var gotID =$("#inpt_gcck").val();
+           var diaoDanHao = $("#diaodanIp").val();
+              var shebeiming = $("#sheBeiIp").val();
+               var shebeiduankou = $("#duanKouIp").val();
+                 var gotPlace =$("#gzclPlace").val();
+                 console.log(gotID,diaoDanHao,shebeiduankou,shebeiming,gotPlace);
+         if((gotID==undefined|gotID=="")&&
+             (diaoDanHao==undefined|diaoDanHao==""|shebeiming==""|shebeiduankou=="")
+             &&(gotPlace==undefined|gotPlace=="")){
+             alert("尚未输入信息");
+             return ;
+         }
+
          if(gotInfoNew[3]=="gcck"){
 
               //console.log(email);
                 //工程号 id
-                var gotID =$("#inpt_gcck").val();
+
               //console.log("ID:"+$("#inpt_gcck").val());
               chuKu(gotID,gotInfo,email);
             // alert("已做出库申请"); TIPS SHOWED IN AJAX
          }
          if(gotInfoNew[3]=="ywkt"){
              // get the input value ;
-             var diaoDanHao = $("#diaodanIp").val();
-              var shebeiming = $("#sheBeiIp").val();
-               var shebeiduankou = $("#duanKouIp").val();
+
                // console.log("1",diaoDanHao);
                //  console.log("2",shebeiming);
                //   console.log("3",shebeiduankou);
                  toywkt(email,diaoDanHao,shebeiming,shebeiduankou,gotInfoNew[0],gotInfoNew[1],gotInfoNew[2]);
           }
          if(gotInfoNew[3]=="gzcl"){
-                var gotPlace =$("#gzclPlace").val();
+
              togzcl(gotPlace,gotInfoNew[0],gotInfoNew[1],gotInfoNew[2],email);
          }
               $("#out3_info").css("display","none");
@@ -713,7 +730,7 @@ $(document).ready(function(){
          data : data,
          async : true,
          success : function(ret){
-             ajaxret =ret;
+                    ajaxret =ret;
 
                  if(ret[0]=="error"){
                      alert("发生异常");

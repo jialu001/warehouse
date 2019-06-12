@@ -13,6 +13,7 @@ def showInfo(request):
         inp_get = request.GET.get("toolsname")
         res = yi69.objects.filter(mingcheng__icontains=inp_get)
         putFast(res, fin_res)
+        print(fin_res)
     elif(show_type=="sh"):
         sh_id =request.GET.get("id")
         e = yi69.objects.get(id=sh_id)
@@ -34,7 +35,8 @@ def putFast(res,ret):
     # 将res 仅一部分json序列化 返回
     print("进入169查询模式")
     if (not res):
-        ret = ['null']
+        print("查询内容为空")
+        ret.append('null')
     for e in res:
         ctx = {}
         ctx['id'] = e.id

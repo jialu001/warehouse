@@ -1,5 +1,6 @@
 $(document).ready(
-    $("#houtaiSH").click(function () {
+    function () {
+         $("#houtaiSH").click(function () {
         // level check
           var data = {};
           var email =$.cookie('email');
@@ -21,7 +22,13 @@ $(document).ready(
                     }
                 }
             });
+    });
 
 
-    })
+         $("#BuChongGongNeng").click(function () {
+             alert("功能待开发中");
+         })
+    }
+
+
 );

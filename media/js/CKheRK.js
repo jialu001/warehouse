@@ -1,6 +1,6 @@
 $(document).ready(
     function(){
-        var  tishi = {"分公司":"如：广州分公司","备件名称":"设备分类，如：A9K备件","规格型号":"设备型号","设备类型":"所属厂家：如思科"
+        var  tishi = {"分公司":"如：广州分公司","备件名称":"设备分类，如：A9K备件","规格型号":"设备型号","设备厂家":"所属厂家：如思科"
         ,"sn码":"SN码","订单号":"","入库地点":"入库地点，如太阳城","数量":"数量","货位号":"所在库房的位置",
         "所属网络":"如承载网","资产标签":"资产标签 可不填","备注":"其他信息"};
         var idset = ["fenggongsi","name","xinghao","leixing","sn","dingdanhao","rukudidian",
@@ -325,7 +325,7 @@ $(document).ready(
         });
          //辅助填写CWZ
           $("#gengxin_auto").click(function(){
-              fuzhuInfo = ["广州分公司","A9K","","思科","","","太阳城",
+              fuzhuInfo = ["广州分公司","A9K","","思科","","暂无","",
                   "1","","承载网","暂无","某工程入库"];
            for(i=0;i<shuruku.length;i++){
               shuruku[i].value = fuzhuInfo[i];

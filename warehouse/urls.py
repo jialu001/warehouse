@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from extra_apps import To_main,to_log,to_contact
+from extra_apps import To_main,to_log,to_contact,To_newIndex
 from django.conf.urls import url
 from django.views.static import serve
 from warehouse.settings import MEDIA_ROOT
@@ -27,6 +27,7 @@ urlpatterns = [
     path('',to_log.to_des),  # new
     path('log',to_log.to_des),  # new
     path('index.html', To_main.to_index),  # new
+    path('new', To_newIndex.to_index),  # 新主页测试
     path('admin/', admin.site.urls),
     url(r'^media/(?P<path>.*)$', serve, {"document_root": MEDIA_ROOT}),
     path('search.html', To_search.search_post1),
